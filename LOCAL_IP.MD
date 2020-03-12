@@ -53,7 +53,7 @@ This information is personal, if you not neet can be removed.
 
 
 ## Open and change the file "/etc/logstash/config.d/02-iwsva-filter.conf"
-**change this **
+**change this**
 
     # If IP is private then drop it
     if [dst_locality] == "private" {
