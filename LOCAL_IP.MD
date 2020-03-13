@@ -14,13 +14,16 @@ Considering if the index was start with "logstash-iwsva" you need to run this co
 
 ## Explanation about translate:
 **Create the local geoip translate documents:**
+
 Supose i have 2 source private networks then i need to geo point both. I will need to create a yml to use in translation process.
 
 **The private networks was in example:**
+
 Network 1 - 172.16.0.0/22 (172.16.0.1 - 172.16.3.254)
 Network 2 - 172.16.4.0/22 (172.16.4.1 - 172.16.7.254)
 
 **Is need to create a regular expression that match with my networks:**
+
 To Network 1 the regular expression was 172\.16\.[0-3]\.
 To Network 2 the regular expression was 172\.16\.[4-7]\.
 
@@ -34,21 +37,27 @@ To Network 2 the regular expression was 172\.16\.[4-7]\.
 ## To populate the information about geo point you may need this:
 
 **Coordenates:**
+
 https://www.mapcoordinates.net/en
 
 **Country_name and Country_code:**
+
 https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 
 **Region_code:**
+
 https://en.wikipedia.org/wiki/ISO_3166-2
 
 **Continent codes:**
+
 https://datahub.io/core/continent-codes/r/0.html
 
 **Timezone:**
+
 https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 **Building:**
+
 This information is personal, if you not neet can be removed.
 
 
