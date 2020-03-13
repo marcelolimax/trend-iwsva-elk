@@ -4,11 +4,11 @@ Before populate/create the index you need to create an index template, with mapp
 
 Considering if the index was start with "logstash-iwsva" you need to run this command line:
 
-*IF ELASTICSEARCH HAS SECURITY ENABLED RUN THIS COMMAND CHANGING THE USER AND PASSWORD FIELDS IN CURL:*
+**IF ELASTICSEARCH HAS SECURITY ENABLED RUN THIS COMMAND CHANGING THE USER AND PASSWORD FIELDS IN CURL:**
 
     curl -u user:"password" -X PUT "http://ELASTICSEARCH_IP:9200/_template/logstash-iwsva?pretty" -H 'Content-Type: application/json' -d'{"index_patterns": ["logstash-iwsva-*"],"mappings": {"properties": {"dst_ip_geoip": {"properties": {"city_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"continent_code": {"type": "keyword"},"country_code2": {"type": "keyword"},"country_code3": {"type": "keyword"},"country_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"dma_code": {"type": "long"},"ip": {"type": "ip"},"latitude": {"type": "float"},"location": {"type": "geo_point"},"longitude": {"type": "float"},"postal_code": {"type": "keyword"},"region_code": {"type": "keyword"},"region_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"building": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"timezone": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}}}},"src_ip_geoip": {"properties": {"city_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"continent_code": {"type": "keyword"},"country_code2": {"type": "keyword"},"country_code3": {"type": "keyword"},"country_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"dma_code": {"type": "long"},"ip": {"type": "ip"},"latitude": {"type": "float"},"location": {"type": "geo_point"},"longitude": {"type": "float"},"postal_code": {"type": "keyword"},"region_code": {"type": "keyword"},"region_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"building": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"timezone": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}}}}}}
     
-  *IF ELASTICSEARCH DONT HAVE SECURITY ENABLED RUN THIS COMMAND*
+  **IF ELASTICSEARCH DONT HAVE SECURITY ENABLED RUN THIS COMMAND**
 
     curl -X PUT "http://ELASTICSEARCH_IP:9200/_template/logstash-iwsva?pretty" -H 'Content-Type: application/json' -d'{"index_patterns": ["logstash-iwsva-*"],"mappings": {"properties": {"dst_ip_geoip": {"properties": {"city_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"continent_code": {"type": "keyword"},"country_code2": {"type": "keyword"},"country_code3": {"type": "keyword"},"country_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"dma_code": {"type": "long"},"ip": {"type": "ip"},"latitude": {"type": "float"},"location": {"type": "geo_point"},"longitude": {"type": "float"},"postal_code": {"type": "keyword"},"region_code": {"type": "keyword"},"region_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"building": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"timezone": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}}}},"src_ip_geoip": {"properties": {"city_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"continent_code": {"type": "keyword"},"country_code2": {"type": "keyword"},"country_code3": {"type": "keyword"},"country_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"dma_code": {"type": "long"},"ip": {"type": "ip"},"latitude": {"type": "float"},"location": {"type": "geo_point"},"longitude": {"type": "float"},"postal_code": {"type": "keyword"},"region_code": {"type": "keyword"},"region_name": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"building": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}},"timezone": {"type": "text","fields": {"keyword": {"type": "keyword","ignore_above": 256}}}}}}}'
 
@@ -68,22 +68,22 @@ This information is personal, if you not neet can be removed.
 
     # If IP is private then drop it
     if [dst_locality] == "private" {
-      drop {}
+        drop {}
     }
 
 **to this:**
 
     # If IP is private then drop it
     if [dst_locality] == "private" {
-      geoip {
-	      source => "src_ip"
-	      target => "src_ip_geoip"
-      }
-      translate {
-          regex => true
-          dictionary_path => "/etc/logstash/translation/iwsvasrc.yml"
-          field => "src_ip"
-          }
-      }
+        geoip {
+            source => "src_ip"
+            target => "src_ip_geoip"
+        }
+        translate {
+            regex => true
+            dictionary_path => "/etc/logstash/translation/iwsvasrc.yml"
+            field => "src_ip"
+        }
+    }
   
-  **Start Logstash**
+  **After change your file start Logstash**
