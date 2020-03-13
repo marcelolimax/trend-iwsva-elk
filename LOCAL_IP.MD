@@ -20,11 +20,13 @@ Supose i have 2 source private networks then i need to geo point both. I will ne
 **The private networks was in example:**
 
 Network 1 - 172.16.0.0/22 (172.16.0.1 - 172.16.3.254)
+
 Network 2 - 172.16.4.0/22 (172.16.4.1 - 172.16.7.254)
 
 **Is need to create a regular expression that match with my networks:**
 
 To Network 1 the regular expression was 172\.16\.[0-3]\.
+
 To Network 2 the regular expression was 172\.16\.[4-7]\.
 
 **To create a translate file change with your data and run the command line:**
